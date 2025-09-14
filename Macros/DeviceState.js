@@ -82,10 +82,10 @@ function updateLabel(textLabel, value) {
 
 function createPanel() {
   const xml = `
-  <Extensions>
+<Extensions>
   <Version>1.11</Version>
   <Panel>
-    <PanelId>currentStatePanel</PanelId>
+    <PanelId>currentState</PanelId>
     <Origin>local</Origin>
     <Location>RoomScheduler</Location>
     <Icon>Camera</Icon>
@@ -129,19 +129,11 @@ function createPanel() {
           <Options>size=4;fontSize=small;align=center</Options>
         </Widget>
       </Row>
-      <Row>
-        <Name>Row</Name>
-        <Widget>
-          <WidgetId>refreshButton</WidgetId>
-          <Name>Refresh Now</Name>
-          <Type>Button</Type>
-          <Options>size=2</Options>
-        </Widget>
-      </Row>
       <Options>hideRowNames=1</Options>
     </Page>
   </Panel>
 </Extensions>
+
   `
   xapi.Command.UserInterface.Extensions.Panel.Save({
     PanelId: "currentState"
