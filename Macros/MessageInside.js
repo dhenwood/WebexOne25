@@ -1,18 +1,25 @@
 import xapi from 'xapi';
 
-
-const spacesUrl = "https://workspaces.dnaspaces.io/?token=9abad65f-ff6f-49f6-932d-d87c28909f59#/dashboard"
-
+/*
+Pulled from: https://github.com/dhenwood/Macro-for-Outside-Nav
+*/
 
 function sendMessage(message) {
-    xapi.Command.UserInterface.Message.Alert.Display({ Duration: 10, Target: "OSD", Title: message, Text: "Message from outside room"})
-    xapi.Command.Audio.Sound.Play({Sound: "Alert" });
-    xapi.Command.UserInterface.Extensions.Panel.Close({ Target: "RoomScheduler" });
+  xapi.Command.UserInterface.Message.Alert.Display({
+    Duration: 10,
+    Target: "OSD",
+    Title: message,
+    Text: "Message from outside room"
+  })
+  xapi.Command.Audio.Sound.Play({
+    Sound: "Alert"
+  });
+  xapi.Command.UserInterface.Extensions.Panel.Close({
+    Target: "RoomScheduler"
+  });
 }
 
 function init() {
-  xapi.Config.WebEngine.Features.Peripherals.WebGL.set("On");
-  xapi.Config.HttpClient.Mode.set("On");
   setupListerners();
   createPanels();
 }
@@ -91,25 +98,12 @@ function createPanels() {
       <Options>hideRowNames=1</Options>
     </Page>
   </Panel>
-</Extensions>
-  `
-  const spacesXml = `
-  <Extensions>
-  <Version>1.11</Version>
-  <Panel>
-    <Order>2</Order>
-    <Origin>local</Origin>
-    <Location>RoomScheduler</Location>
-    <Icon>Custom</Icon>
-    <Name>Cisco Spaces</Name>
-    <ActivityType>WebApp</ActivityType>
-    <ActivityData>${spacesUrl}</ActivityData>
-  </Panel>
-</Extensions>
+  </Extensions>
   `
 
-  xapi.Command.UserInterface.Extensions.Panel.Save({PanelId: "messagesPanel"}, messageXml);
-  //xapi.Command.UserInterface.Extensions.Panel.Save({PanelId: "spacesPanel"}, spacesXml);
+  xapi.Command.UserInterface.Extensions.Panel.Save({
+    PanelId: "messagesPanel"
+  }, messageXml);
 }
 
 init();
